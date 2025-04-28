@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аудиоплеер</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: transparent;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .player-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .player {
+      position: relative;
+      width: 180px;
+      height: 180px;
+    }
+
+    .circle-text {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    svg text {
+      font-size: 12px;
+      fill: #333;
+      letter-spacing: 1.5px;
+    }
+
+    .audio-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 2px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .audio-button svg {
+      width: 24px;
+      height: 24px;
+      fill: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="player-wrapper">
+  <div class="player">
+    <div class="circle-text">
+      <svg viewBox="0 0 180 180">
+        <defs>
+          <path id="circlePath" d="M 90, 90 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0"/>
+        </defs>
+        <text>
+          <textPath href="#circlePath" startOffset="0%">
+            • ВКЛЮЧИ МЕНЯ И УСЛЫШИШЬ КАК ЗВУЧИТ НАША ЛЮБОВЬ
+          </textPath>
+        </text>
+      </svg>
+    </div>
+
+    <audio id="audio" src="https://dl.dropboxusercontent.com/scl/fi/1kwjn1rbqma8fd14hmdzh/miyagi-jendshpil-feat.-rem-digga-untouchable.mp3?rlkey=t7kp7w2ezjlp5rxpkg8wf8f1r&st=1bb3od69&dl=0"></audio>
+    <div class="audio-button" onclick="toggleAudio()" id="btn">
+      <svg id="icon" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  const audio = document.getElementById('audio');
+  const icon = document.getElementById('icon');
+
+  function toggleAudio() {
+    if (audio.paused) {
+      audio.play();
+      icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+    } else {
+      audio.pause();
+      icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    }
+  }
+</script>
+
+</body>
+</html>
